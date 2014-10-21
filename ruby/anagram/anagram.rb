@@ -1,18 +1,23 @@
-
 class Anagram
 	def initialize(word)
-		@word = word.downcase
-		@pattern = @word.chars.sort
+		@pattern = word.downcase
+		@pattern_sorted = @pattern.chars.sort
 	end
 
 	def match(words)
-		matched = []
+		words.select { |word| anagram?(word.downcase) }
+	end
 
-		words.each do |word|
-			word_sorted = word.downcase.chars.sort
-			matched << word if (word.downcase != @word && word_sorted == @pattern)
-		end
+	private
+	def anagram?(downcase_word)
+		different_from_pattern?(downcase_word) && consist_all_necessary_characters?(downcase_word)
+	end
 
-		matched
+	def different_from_pattern?(downcase_word)
+		downcase_word != @pattern
+	end
+
+	def consist_all_necessary_characters?(downcase_word)
+		downcase_word.chars.sort == @pattern_sorted
 	end
 end
