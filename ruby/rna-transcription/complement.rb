@@ -1,21 +1,18 @@
 
 module Complement
   def self.of_dna(dna_strand)
-    dna_strand.chars.map { |n| rna_nucleotide(n) }.join
+    transcibe(dna_strand, DNA_TO_RNA)
   end
 
   def self.of_rna(rna_strand)
-    rna_strand.chars.map { |n| dna_nucleotide(n) }.join
+    transcibe(rna_strand, RNA_TO_DNA)
   end
 
 
   DNA_TO_RNA = { 'G' => 'C','C' => 'G', 'T' => 'A', 'A' => 'U' }
+  RNA_TO_DNA = DNA_TO_RNA.invert
 
-  def self.rna_nucleotide(nucleotide)
-    DNA_TO_RNA[nucleotide]
-  end
-
-  def self.dna_nucleotide(nucleotide)
-    DNA_TO_RNA.invert[nucleotide]
+  def self.transcibe(strand, transcription_hash)
+    strand.chars.map { |n| transcription_hash[n] }.join
   end
 end
