@@ -1,6 +1,6 @@
 class Raindrops
   def self.convert(number)
-    Raindrops.new(number).speak
+    Raindrops.new(number).to_s
   end
 
   FACTORS_SOUNDS = {
@@ -16,8 +16,8 @@ class Raindrops
     @factors = number_factors
   end
 
-  def speak
-    @factors.empty? ? @number.to_s : sound
+  def to_s
+    @factors.empty? ? @number.to_s : factors_sound
   end
 
   private
@@ -25,7 +25,7 @@ class Raindrops
     FACTORS_TO_CHECK.select { |n| (@number % n).zero? }
   end
 
-  def sound
-    @factors.each.map { |r| FACTORS_SOUNDS[r] }.join
+  def factors_sound
+    @factors.each.map { |n| FACTORS_SOUNDS[n] }.join
   end
 end
